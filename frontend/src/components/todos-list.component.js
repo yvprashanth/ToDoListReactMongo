@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+
+const Todo = props => (
+    <tr>
+        <td>{props.todo.todo_description}</td>
+        <td>{props.todo.todo_responsible}</td>
+        <td>{props.todo.todo_priority}</td>
+        <td>
+            <Link to={"/edit/"+props.todo._id}>Edit</Link>
+        </td>
+    </tr>
+)
+
 
 export default class TodoList extends Component { 
     constructor(props){
@@ -18,10 +30,29 @@ export default class TodoList extends Component {
             })
     }
 
+    todoList() {
+        return this.state.todos.map(function(currentTodo, i){
+            return <Todo todo={currentTodo} key={i} />;
+        })
+    }
+
     render(){
         return (
             <div>
-                Welcome to Todo List Component
+                <h3>Todos List</h3>
+                <table className="table table-striped" style={{ marginTop: 20 }} >
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Responsible</th>
+                            <th>Priority</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { this.todoList() }
+                    </tbody>
+                </table>
             </div>
         )
     }
