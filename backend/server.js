@@ -5,26 +5,25 @@ const mongoose = require('mongoose');
 const cors = require('cors')
 const PORT = 4000
 const todoRoutes = express.Router();
-
+const mainRoute = express.Router();
 app.use(cors())
 app.use(bodyParser.json())
+
+let Todo = require('./todo.model');
 
 mongoose.connect('mongodb://127.0.0.1:27017/todos', {
     useNewUrlParser: true
 });
 
-const connection = monogoose.connection;
-
+const connection = mongoose.connection;
 
 connection.once('open', function(){
     console.log("Connection with DB Established");
 })
 
-app.listen(PORT, function(){
-    console.log("Server is running on PORT:" + PORT);
+mainRoute.route('/').get(function(req, res){
+    res.json({"Hey there":""})
 })
-
-app.use('/todos', todoRoutes);
 
 todoRoutes.route('/').get(function(req, res) {
     Todo.find(function(err, todos) {
@@ -70,4 +69,12 @@ todoRoutes.route('/update/:id').post(function(req, res) {
                 res.status(400).send("Update not possible");
             });
     });
+});
+
+app.use('/', mainRoute);
+
+app.use('/todos', todoRoutes);
+
+app.listen(PORT, function(){
+    console.log("Server is running on PORT:" + PORT);
 });

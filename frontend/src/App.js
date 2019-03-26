@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <h2>ToDo List App</h2>
+          <h2>2Do App</h2>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="https://github.com/yvprashanth" target="_blank">
               <img src={logo} width="30" height="30" alt="github.com/yvprashanth" />
