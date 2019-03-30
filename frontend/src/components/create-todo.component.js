@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import  { Redirect } from 'react-router-dom'
 
 export default class EditTodo extends Component { 
     constructor(props){
@@ -13,7 +15,8 @@ export default class EditTodo extends Component {
             todo_description: '', 
             todo_responsible: '',
             todo_priority: '',
-            todo_completed: false
+            todo_completed: false,
+            toDashboard : false
         }
     }
 
@@ -49,9 +52,26 @@ export default class EditTodo extends Component {
             todo_priority: '',
             todo_completed: false
         })
+
+        const obj = {}
+        obj.todo_description = this.state.todo_description
+        obj.todo_responsible = this.state.todo_responsible
+        obj.todo_priority = this.state.todo_priority
+
+        var self = this;
+        axios.post('http://localhost:4000/todos/add/', obj)
+        .then(function(res){ 
+            self.setState({toDashboard: true})
+            console.log(res.data)
+        });
+
+        return <Redirect to='/'  />
     }
 
     render(){
+        if (this.state.toDashboard === true) {
+            return <Redirect to='/' />
+        }
         return (
             <div style={{marginTop: 10}}>
                 <h3>Create New Todo</h3>

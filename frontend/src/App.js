@@ -7,7 +7,6 @@ import CreateTodo from "./components/create-todo.component";
 import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
 
-
 class App extends Component {
   render() {
     return (
@@ -15,7 +14,7 @@ class App extends Component {
         <div className="container">
           <h2>2Do App</h2>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="https://github.com/yvprashanth" target="_blank">
+            <a className="navbar-brand" href="https://github.com/yvprashanth">
               <img src={logo} width="30" height="30" alt="github.com/yvprashanth" />
             </a>
             <Link to="/" className="navbar-brand">ToDoNow</Link>
