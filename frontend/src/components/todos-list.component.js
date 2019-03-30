@@ -9,10 +9,11 @@ const Todo = props => (
         <td>{props.todo.todo_priority}</td>
         <td>
             <Link to={"/edit/"+props.todo._id}>Edit</Link>
+            <br />
+            <Link to={"/delete/"+props.todo._id}>Delete</Link>
         </td>
     </tr>
 )
-
 
 export default class TodoList extends Component { 
     constructor(props){
